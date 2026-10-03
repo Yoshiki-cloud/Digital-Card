@@ -127,7 +127,6 @@
       <div class="name-en">Yoshiki Yagi</div>
     </div>
 
-    <!-- 連絡先情報セクション -->
     <div class="info-list">
       <div class="info-row">
         <span class="info-label">TEL</span>
@@ -143,35 +142,11 @@
       </div>
     </div>
 
-    <!-- iPhone連絡帳登録ボタン -->
-    <a id="saveVcardLink" class="btn-save" href="#">
+    <!-- 静的vcfファイルへの直接リンク（iOS Safari標準対応） -->
+    <a class="btn-save" href="contact.vcf">
       📲 iPhoneの連絡先に登録
     </a>
   </div>
-
-  <script>
-    const vcard = 
-`BEGIN:VCARD
-VERSION:3.0
-N:八木;喜輝;;;
-FN:八木 喜輝
-ORG:株式会社日立製作所 研究開発グループ;管理統括センタ 財務部 財務戦略1ユニット
-TITLE:財務戦略1ユニット
-TEL;TYPE=CELL,VOICE:+81-80-2304-4720
-EMAIL;TYPE=WORK,INTERNET:yoshiki.yagi.ou@hitachi.com
-ADR;TYPE=WORK:;;東恋ヶ窪一丁目280番地;国分寺市;東京都;185-8601;日本
-URL:https://www.hitachi.co.jp
-END:VCARD`;
-
-    const blob = new Blob([vcard], { type: "text/vcard;charset=utf-8" });
-    const reader = new FileReader();
-    reader.onload = function(e) {
-      const link = document.getElementById('saveVcardLink');
-      link.setAttribute('href', e.target.result);
-      link.setAttribute('download', 'yoshiki_yagi.vcf');
-    };
-    reader.readAsDataURL(blob);
-  </script>
 
 </body>
 </html>
