@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>八木 喜輝 | デジタル名刺</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #ffffff;
+      --text-main: #1e293b;
+      --text-sub: #475569;
+      --border: #e2e8f0;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 24px 16px;
+    }
+    .card {
+      width: 100%;
+      max-width: 400px;
+      background: var(--card-bg);
+      border-radius: 24px;
+      padding: 32px 20px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .company {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-sub);
+      line-height: 1.4;
+      white-space: nowrap;
+    }
+    .org-unit {
+      font-size: 12px;
+      color: #64748b;
+      margin-top: 2px;
+      white-space: nowrap;
+    }
+    .name-block {
+      margin-top: 14px;
+      margin-bottom: 24px;
+    }
+    .name-ja {
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      color: var(--text-main);
+    }
+    .name-en {
+      font-size: 14px;
+      font-weight: 500;
+      color: #64748b;
+      margin-top: 2px;
+    }
+    .info-list {
+      width: 100%;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px 14px;
+      margin-bottom: 24px;
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--text-main);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      text-align: left;
+    }
+    .info-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      white-space: nowrap;
+    }
+    .info-label {
+      color: #64748b;
+      font-weight: 600;
+      min-width: 38px;
+      flex-shrink: 0;
+    }
+    .info-val {
+      white-space: nowrap;
+    }
+    .btn-save {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-decoration: none;
+      padding: 15px;
+      border-radius: 14px;
+      font-size: 15px;
+      font-weight: 700;
+      background: #0f172a;
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.25);
+      transition: transform 0.1s ease, opacity 0.2s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .btn-save:active {
+      transform: scale(0.98);
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <div class="company">株式会社日立製作所 研究開発グループ</div>
+    <div class="org-unit">管理統括センタ 財務部 財務戦略1ユニット</div>
+
+    <div class="name-block">
+      <div class="name-ja">八木 喜輝</div>
+      <div class="name-en">Yoshiki Yagi</div>
+    </div>
+
+    <!-- 連絡先情報セクション -->
+    <div class="info-list">
+      <div class="info-row">
+        <span class="info-label">TEL</span>
+        <span class="info-val">080-2304-4720</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">E-mail</span>
+        <span class="info-val">yoshiki.yagi.ou@hitachi.com</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">場所</span>
+        <span class="info-val">〒185-8601 東京都国分寺市東恋ヶ窪1-280</span>
+      </div>
+    </div>
+
+    <!-- iPhone連絡帳登録ボタン -->
+    <a id="saveVcardLink" class="btn-save" href="#">
+      📲 iPhoneの連絡先に登録
+    </a>
+  </div>
+
+  <script>
+    const vcard = 
+`BEGIN:VCARD
+VERSION:3.0
+N:八木;喜輝;;;
+FN:八木 喜輝
+ORG:株式会社日立製作所 研究開発グループ;管理統括センタ 財務部 財務戦略1ユニット
+TITLE:財務戦略1ユニット
+TEL;TYPE=CELL,VOICE:+81-80-2304-4720
+EMAIL;TYPE=WORK,INTERNET:yoshiki.yagi.ou@hitachi.com
+ADR;TYPE=WORK:;;東恋ヶ窪一丁目280番地;国分寺市;東京都;185-8601;日本
+URL:https://www.hitachi.co.jp
+END:VCARD`;
+
+    const blob = new Blob([vcard], { type: "text/vcard;charset=utf-8" });
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const link = document.getElementById('saveVcardLink');
+      link.setAttribute('href', e.target.result);
+      link.setAttribute('download', 'yoshiki_yagi.vcf');
+    };
+    reader.readAsDataURL(blob);
+  </script>
+
+</body>
+</html>
